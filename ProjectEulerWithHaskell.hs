@@ -1,3 +1,7 @@
+
+import Data.List
+import Data.Char
+
 --Project Euler problem 1 : Sum of
 --multiples of 3 and 5 under 1000
 
@@ -127,3 +131,52 @@ project_euler_15 = product [21..40] `div` product [2..20]
 
 project_euler_16 = sum . toDigits $ 2^1000
 --1366
+
+--Can't solve problems 17-19
+
+--Project Euler problem 20 : find the sum
+--of the digits of factorial 100
+
+project_euler_20 = sum . toDigits $ product [2..100]
+--648
+
+--Project Euler problem 21 : Find
+--the sum of all amicable numbers
+--under 10000
+
+sumOfDiv :: Integer -> Integer
+sumOfDiv n = sum [ x | x <- [1..n `quot` 2], n `mod` x ==0]
+
+isAmicable :: Integer -> Integer -> Bool
+isAmicable n m = sumOfDiv n == m && sumOfDiv m == n && n /= m
+
+project_euler_21 = sum [ a | a<- [2..9999], let b = sumOfDiv a, isAmicable a b]
+--31626
+
+--Project Euler problem 22 : find the sum
+--of all name scored in the file
+
+valueOfName :: [Char] -> Int -> Int
+valueOfName str i = (i*) . sum . map (\c -> ord c - ord 'A' + 1) $ str
+
+project_euler_22 = do
+                xs <- readFile "project_euler_22.txt"
+                let names = sort $ read$"["++xs++"]"
+                let nameScores = zipWith valueOfName names [1..]
+                print . sum $ nameScores
+--871198282
+
+--Cant solve problem 23
+
+--Project Euler problem 24 :
+--what is the millionth
+--lexicographic permutations
+
+project_euler_24 = ( !! 999999) . sort . permutations $ "0123456789"
+--2783915460
+
+--Project Euler problem 25 : find the first
+--fibonacci number to have 1000 digits
+
+
+project_euler_25 = length $ takeWhile (<10^999) fib
