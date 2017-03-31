@@ -101,5 +101,29 @@ project_euler_9 = product . head . pythagoreanTriplets $ 1000
 project_euler_10 = sum $ takeWhile (<2000000) primeList
 --142913828920
 
-isPrime' n = n `elem` primeList'
-primeList' = 2 : filter isPrime' [3,5..]
+
+--Can't Solve problems 11-12
+
+--Project Euler 13 : Work out
+--the first ten digits of the sum
+--of the one hundred 50-digit numbers
+
+project_euler_13 = do
+                xs <- fmap (map read . lines) (readFile "project_euler_13.txt")
+                print . take 10 . show . sum $ xs
+
+--5537376230
+
+--Can't solve problem 14
+
+--Project Euler problem 15 : how many
+--routes are there throught a 20x20 grid
+
+project_euler_15 = product [21..40] `div` product [2..20]
+--137846528820
+
+--Project Euler problem 16 : Find the sum
+--of the digits of the number 2^1000
+
+project_euler_16 = sum . toDigits $ 2^1000
+--1366
